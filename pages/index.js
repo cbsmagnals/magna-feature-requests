@@ -20,19 +20,16 @@ const FeatureRequestDemo = () => {
   const [activeSection, setActiveSection] = React.useState('problem');
   const [showSummary, setShowSummary] = React.useState(false);
 
-  // Calculate RICE score using the formula: (Reach × Impact × Confidence) ÷ Effort
   const calculateRICEScore = () => {
     if (formData.effort === 0) return 0;
     return (formData.reach * formData.impact * formData.confidence) / formData.effort;
   };
 
-  // Update RICE score whenever form data changes
   React.useEffect(() => {
     const score = calculateRICEScore();
     setRiceScore(score);
   }, [formData]);
 
-  // Handle changes to any form input
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -41,7 +38,6 @@ const FeatureRequestDemo = () => {
     }));
   };
 
-  // Provide feedback based on RICE score
   const renderScoreExplanation = () => {
     if (riceScore === 0) return "Complete the RICE scoring to see your priority score";
     if (riceScore >= 8) return "High Priority: This feature shows strong potential for significant impact";
